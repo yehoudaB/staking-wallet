@@ -1,0 +1,10 @@
+<mat-toolbar>
+    <button mat-button routerLink="/">Home</button>
+  
+    <!-- add button at end of toolbar -->
+    <span  class="fill-remaining-space"></span>
+    <span >{{ address ?   address : ''}} </span>
+   
+    <button mat-button class="btn-connect" (click)="walletToggle()">{{ address ? 'Disconnect  ' : 'Connect wallet'}} </button>
+</mat-toolbar>
+

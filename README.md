@@ -1,10 +1,10 @@
-# Using multi-sig-wallet-v2 Project
+# Using staking-wallet
 
-This guide provides step-by-step instructions on how to use the multi-sig-wallet-v2 project. multi-sig-wallet-v2 is a decentralized web application that allows you to interact with the Ethereum blockchain. Follow the steps below to get started:
+This guide provides step-by-step instructions on how to use the staking-wallet project. staking-wallet is a decentralized web application that allows you to interact with the Ethereum blockchain. Follow the steps below to get started:
 
 ## Prerequisites
 
-Before using multi-sig-wallet-v2, make sure you have the following prerequisites installed:
+Before using staking-wallet, make sure you have the following prerequisites installed:
 
 - Git: To clone the project.
 - Node.js: To run the necessary commands and scripts.
@@ -54,15 +54,15 @@ Before using multi-sig-wallet-v2, make sure you have the following prerequisites
    - Enter the private key associated with one of the accounts from the ``npx hardhat node`` output.
    - Follow the prompts to complete the import process.
 
-8. Access the multi-sig-wallet-v2 web application:
+8. Access the staking-wallet web application:
 
 9. Connect Metamask to the website:
-- In the multi-sig-wallet-v2 web application, you will see a "Connect Wallet" or similar button.
+- In the staking-wallet web application, you will see a "Connect Wallet" or similar button.
 - Click on it to initiate the wallet connection process.
 - Metamask will prompt you to connect to the website.
 - Approve the connection request in Metamask.
 
-You are now ready to use the multi-sig-wallet-v2 project! You can interact with Ethereum through the web application and perform various operations using your connected Metamask wallet.
+You are now ready to use the staking-wallet project! You can interact with Ethereum through the web application and perform various operations using your connected Metamask wallet.
 
 Note: Remember that the local development network is for testing purposes and should not be used for production or real transactions on the Ethereum mainnet.
 

@@ -12,7 +12,7 @@ async function main() {
   await stakingWallet.deployed();
 
   console.log(
-    `MultiSigWalletV2 contract deployed to ${stakingWallet.address}`
+    `stakingWallet contract deployed to ${stakingWallet.address}`
   );
   
 }

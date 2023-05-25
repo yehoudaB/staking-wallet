@@ -23,7 +23,7 @@ contract StakingContract is ERC20 {
     EnumerableMap.UintToAddressMap private walletsStaked;
     uint256 public constant rewardPercentPerBlock = 1; 
 
-    constructor(uint256 _initialSupply) ERC20('Lion token', 'LION') {
+    constructor() ERC20('Lion token', 'LION') {
     }
     
     function walletCreate() public returns (uint256 walletId, address walletAddress) {
@@ -36,6 +36,8 @@ contract StakingContract is ERC20 {
         }));
         return (stakeWallets.length -1, address(newWallet));
     }
+
+   
 
     function getWallets() public view returns (StakeWallet[] memory) {
         return stakeWallets;

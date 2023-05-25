@@ -2,18 +2,7 @@ import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
 
-// create a task for accounts that will liste the accoutns that we get from the hardhat node and the balance  each account currently holds
-task("accounts", "Prints the list of accounts", async (args, hre) => {
-  
-  
-  const accounts = await hre.ethers.getSigners();
-  for (const account of accounts) {
-    const balance = await account.getBalance();
-    
-    console.log(account.address , balance.toString());
 
-  }
-});
   
   let API_URL = process.env["API_URL"] ? process.env["API_URL"] : "";
   let PRIVATE_KEY = process.env["PRIVATE_KEY"] ? process.env["PRIVATE_KEY"] : "";

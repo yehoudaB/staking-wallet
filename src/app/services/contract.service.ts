@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  errors, ethers } from 'ethers';
-import  MultiSigWallet  from '../../artifacts/contracts/MultiSigWallet.sol/MultiSigWallet.json';
+import   StakingContract  from '../../artifacts/contracts/StakingContract.sol/StakingContract.json';
 import { BehaviorSubject, from } from 'rxjs';
 import { WalletService } from './wallet.service';
 import { AlchemyService } from './alchemy.service';
@@ -20,7 +20,7 @@ export class ContractService {
   withdrawTxs$= this.withdrawTxsSubject.asObservable();
   provider = new ethers.providers.Web3Provider(window.ethereum);
   signer = this.provider.getSigner();
-  contract = new ethers.Contract(this.contractAddress, MultiSigWallet.abi, this.signer);
+  contract = new ethers.Contract(this.contractAddress, StakingContract.abi, this.signer);
   
   constructor(
     private  walletService: WalletService,
@@ -34,7 +34,7 @@ export class ContractService {
 
   async getContractBallanceWithEther() {
     const provider = await new ethers.providers.Web3Provider(window.ethereum);
-    const contract = await new ethers.Contract(this.contractAddress, MultiSigWallet.abi, provider);
+    const contract = await new ethers.Contract(this.contractAddress, StakingContract.abi, provider);
     this.ethBalanceSubject.next(ethers.utils.formatEther(await contract['balanceOf']()));
   }   
   async getContractBallanceWithAlchemy() { //not working in localhost

@@ -13,11 +13,11 @@ contract Wallet {
         owner = payable(tx.origin);
     }
 
-    function deposit() public payable onlyOwner {
+    function deposit() public payable  {
 
     }
 
-    function withdraw(address payable receiver, uint amount) public onlyOwner {
+    function withdraw(address payable receiver, uint amount) public  {
         receiver.transfer(amount);
     }
 
@@ -27,8 +27,5 @@ contract Wallet {
 
     receive() external payable {}
 
-    modifier onlyOwner() {
-        require(tx.origin == owner, "Not an owner of the wallet");
-        _;
-    }
+  
 }

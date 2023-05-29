@@ -7,8 +7,12 @@ import "./Wallet.sol";
 
 
 contract StakingContract is ERC20 {
-    event StakeEth(uint256 walletId, uint256 amount, uint256 startTime);
-    event UnStakeEth(uint256 walletId, uint256 amount, uint256 numStocksReward);
+    event WalletCreate(uint256 walletid, address _address);
+    event WalletDeposit(uint256 walletid, uint256 amount);
+    event StakeEth(uint256 walletid, uint256 amount, uint256 startTime);
+    event UnStakeEth(uint256 walletid, uint256 amount, uint256 numStocksReward);
+    event WalletWithdraw(uint256 walletid, address _to, uint256 amount);
+
     using EnumerableMap for EnumerableMap.UintToAddressMap;
 
     struct StakeWallet {
@@ -34,7 +38,10 @@ contract StakingContract is ERC20 {
             startTime: 0,
             endTime: 0
         }));
-        return (stakeWallets.length -1, address(newWallet));
+        uint256 newWalletId = stakeWallets.length - 1;
+        address newWalletAddress = address(newWallet);
+        emit WalletCreate(newWalletId, newWalletAddress);
+        return (newWalletId, newWalletAddress);
     }
 
    
@@ -43,21 +50,31 @@ contract StakingContract is ERC20 {
         return stakeWallets;
     }
 
-    function walletDeposit(uint256 _walletId) public payable isWalletOwner(_walletId){
-        stakeWallets[_walletId].wallet.deposit();
+    function walletDeposit(uint256 _walletId) public payable  isWalletOwner(_walletId){
+        StakeWallet storage stakeWallet = stakeWallets[_walletId];
+        stakeWallet.wallet.deposit{value: msg.value}();
+        emit WalletDeposit(_walletId, msg.value);
     }
 
+
+
     function walletBalance(uint256 _walletId) public view returns (uint256) {
-        return stakeWallets[_walletId].wallet.balanceOf();
+       StakeWallet memory stakeWallet = stakeWallets[_walletId];
+        return stakeWallet.wallet.balanceOf();
     }
     
-    function walletWithdraw(uint256 _walletId, address payable _to, uint _amount) public payable isWalletOwner(_walletId) {
-        stakeWallets[_walletId].wallet.withdraw(_to, _amount);
+    function walletWithdraw(
+        uint256 _walletId,
+        address payable _to,
+        uint _amount
+    ) public payable isWalletOwner(_walletId) {
+        StakeWallet storage stakeWallet = stakeWallets[_walletId];
+        stakeWallet.wallet.withdraw(_to, _amount);
+        emit WalletWithdraw(_walletId, _to, _amount);
     }
-     
     function stakeEth(uint256 _walletId) public isWalletOwner(_walletId) {
         StakeWallet storage  stakeWallet = stakeWallets[_walletId];
-        uint256 currentBalance = stakeWallet.wallet.balanceOf();
+        uint256 currentBalance = walletBalance(_walletId);
         require(currentBalance > 0, "You do not have any ETH in your wallet, please fund your wallet before staking");
        
         stakeWallet.wallet.withdraw(payable(address(this)), currentBalance);

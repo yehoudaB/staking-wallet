@@ -34,28 +34,26 @@
 
 
 
-
-<table mat-table [dataSource]="contractService.withdrawTxs$ | async" class="mat-elevation-z8">
-    <ng-container matColumnDef="to">
-        <th mat-header-cell *matHeaderCellDef> withdraw to </th>
-        <td mat-cell *matCellDef="let tx"> {{ tx.to }} </td>
+    <button class="formBtn"  mat-raised-button type="button" (click)="createWallet()">Create a new Wallet</button>
+        
+<table mat-table [dataSource]="contractService.listWallets$ | async" class="mat-elevation-z8">
+    <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> wallet address </th>
+        <td mat-cell *matCellDef="let wallet"> {{ wallet.wallet }} </td>
     </ng-container>
-    <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> amount </th>
-        <td mat-cell *matCellDef="let tx"> {{ tx.amount / 1000000000000000000  }} </td>
+    <ng-container matColumnDef="walletValue">
+        <th mat-header-cell *matHeaderCellDef> wallet value </th>
+        <td mat-cell *matCellDef="let wallet; let i = index">   </td>
     </ng-container>
-    <ng-container matColumnDef="approvals">
-        <th mat-header-cell *matHeaderCellDef> approvals </th>
-        <td mat-cell *matCellDef="let tx"> {{ tx.approvals }} </td>
+    <ng-container matColumnDef="stakedAmount">
+        <th mat-header-cell *matHeaderCellDef> staked amount </th>
+        <td mat-cell *matCellDef="let wallet "> {{ wallet.stakedAmount }} </td>
     </ng-container>
-    <ng-container matColumnDef="sent">
-        <th mat-header-cell *matHeaderCellDef> sent </th>
-        <td mat-cell *matCellDef="let tx"> {{ tx.sent }} </td>
-    </ng-container>
+   
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> action </th>
         <td mat-cell *matCellDef="let tx ; index as i;">  
-            <button  color="primary" mat-raised-button type="button" (click)="approveWithdraw(i)">approve</button>
+            <button  color="primary" mat-raised-button type="button" (click)="deposit(i)">deposit 1 ETH</button>
         </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

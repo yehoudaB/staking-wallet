@@ -1,0 +1,13 @@
+{
+    "editor.fontSize": 16,
+    "debug.console.fontSize": 16,
+    "chat.editor.fontSize": 16,
+    "editor.codeLensFontSize": 0,
+    "editor.inlayHints.fontSize": 0,
+    "editor.lineHeight": 0,
+    "editor.suggestFontSize": 16,
+    "scm.inputFontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "markdown.preview.lineHeight": 1.6,
+    "terminal.integrated.lineHeight": 0
+}

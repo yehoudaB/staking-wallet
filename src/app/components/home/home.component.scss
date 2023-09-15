@@ -1,0 +1,71 @@
+// css container
+ .container {
+   margin: 0 auto;
+   padding: 0 1rem 1rem;
+   padding-top: 1rem;
+ }
+ 
+ .formContainer {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+    justify-content: space-between;
+
+}
+.depositForm, .withdrawForm{
+  display: flex;
+  width: 42%;
+  border: 1px solid black;
+  padding: 1rem;
+
+   justify-content: center;
+ 
+}
+
+.formBtn {
+    margin-left: 2rem;
+    padding-top: 0.1rem;
+    margin-bottom: 0.4em;
+    padding: 1.7rem;
+}
+
+.contractResponse {
+  margin-top: 2rem;
+  width: 80%;
+  border: 1px solid lightblue;
+  background-color: lightblue;
+  padding: 1rem;
+  // align center
+  margin-left: auto;
+  margin-right: auto;
+  
+  border-radius: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+table {
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+// small screen
+@media only screen and (max-width: 600px) {
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+   
+
+  }
+  .depositForm, .withdrawForm{
+    margin-top: 2rem;
+    width: auto;
+    border: 1px solid black;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

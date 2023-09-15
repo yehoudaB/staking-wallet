@@ -1,0 +1,64 @@
+<div class="container">
+    <p>address : {{this.walletService.address$ | async }} </p>
+    <p>ETH balance : {{ walletService.ethBalance$ | async }}</p>
+    
+    <div class="formContainer">
+        <form class="depositForm" >
+            <mat-form-field appearance="outline">
+                        <mat-label>Deposit Ethers</mat-label>
+                <input  matInput   placeholder="12121"  type="number" #depositAmount >
+                <mat-hint>value is in Ethers </mat-hint>
+            </mat-form-field>
+          <button class="formBtn" color="warn" mat-raised-button type="button" (click)="onDeposit(depositAmount)">Deposit</button>
+        
+        </form>
+        <form class="withdrawForm"  >
+            <mat-form-field appearance="outline">
+                        <mat-label>withdraw Ethers</mat-label>
+                <input  matInput   placeholder="12121"  type="number" #withdrawAmount>
+                <mat-hint>value is in Ethers </mat-hint>
+            </mat-form-field>
+          <button class="formBtn" color="primary" mat-raised-button type="button" (click)="onWithdraw(withdrawAmount)">withdraw</button>
+        
+        </form>
+    </div>
+ 
+    <p>Smart contract address : {{this.contractService.getContractAddress()  }} </p>
+    <p>Smart contract  balance : {{ contractService.ethBalance$ | async }}</p>
+
+    <p class="contractResponse" *ngIf="(this.contractService.response$ | async)?.reason" >
+        {{ (this.contractService.response$ | async)?.reason }}
+    </p>
+
+    <h2>the latest block is : {{ alchemyService.latestBlock$  | async }} </h2>
+
+
+
+    <button class="formBtn"  mat-raised-button type="button" (click)="createWallet()">Create a new Wallet</button>
+        
+<table mat-table [dataSource]="contractService.listWallets$ | async" class="mat-elevation-z8">
+    <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> wallet address </th>
+        <td mat-cell *matCellDef="let wallet"> {{ wallet.wallet }} </td>
+    </ng-container>
+    <ng-container matColumnDef="walletValue">
+        <th mat-header-cell *matHeaderCellDef> wallet value </th>
+        <td mat-cell *matCellDef="let wallet; let i = index">   </td>
+    </ng-container>
+    <ng-container matColumnDef="stakedAmount">
+        <th mat-header-cell *matHeaderCellDef> staked amount </th>
+        <td mat-cell *matCellDef="let wallet "> {{ wallet.stakedAmount }} </td>
+    </ng-container>
+   
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> action </th>
+        <td mat-cell *matCellDef="let tx ; index as i;">  
+            <button  color="primary" mat-raised-button type="button" (click)="deposit(i)">deposit 1 ETH</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>    
+</div>
+
+
